@@ -32,7 +32,14 @@ namespace DogGo.Controllers
         // GET: OwnersController1/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            Owner owner = _ownerRepo.GetOwnerById(id);
+
+            if (owner == null)
+            {
+                return NotFound();
+            }
+
+            return View(owner);
         }
 
         // GET: OwnersController1/Create
