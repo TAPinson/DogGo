@@ -64,7 +64,6 @@ namespace DogGo.Repositories
             }
         }
 
-
         public Owner GetOwnerById(int id)
         {
             using (SqlConnection conn = Connection)
@@ -89,7 +88,6 @@ namespace DogGo.Repositories
                             NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId")),
                             Phone = reader.GetString(reader.GetOrdinal("Phone"))
                         };
-
                         reader.Close();
                         return owner;
                     }
