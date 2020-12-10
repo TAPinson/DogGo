@@ -9,7 +9,7 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
+@*<table class="table">
     <thead>
         <tr>
             <th>
@@ -49,5 +49,28 @@
             </td>
         </tr>
 }
+    
     </tbody>
-</table>
+
+</table>*@
+
+<div class="all-walker-cards">
+    @foreach (var item in Model)
+    {
+        <div class="walker-card">
+            <h2>@item.Name</h2>
+            <img class="owner-avatar" src="@item.ImageUrl" alt="avatar" />
+            <div class="owner-details">
+                ID = @item.Id <br />
+                NeighborhoodId = @item.NeighborhoodId <br />
+            </div>
+
+            <div class="owner-actions">
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </div>
+        </div>
+    }
+</div>
+
