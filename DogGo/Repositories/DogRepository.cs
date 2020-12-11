@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using DogGo.Models;
 using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
+using DogGo.Repositories.utils;
 
 namespace DogGo.Repositories
 {
@@ -76,9 +77,11 @@ namespace DogGo.Repositories
                             Name = reader.GetString(reader.GetOrdinal("Name")),
                             OwnerId = reader.GetInt32(reader.GetOrdinal("OwnerId")),
                             Breed = reader.GetString(reader.GetOrdinal("Breed")),
-                            Notes = reader.GetString(reader.GetOrdinal("Notes")),
-                            ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl"))
+                            Notes = ReaderUtils.GetNullableString(reader, "Notes"),
+                            ImageUrl = ReaderUtils.GetNullableString(reader,"ImageUrl")
                         };
+                                              
+
                         reader.Close();
                         return dog;
                     }
