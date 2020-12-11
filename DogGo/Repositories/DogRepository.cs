@@ -48,8 +48,8 @@ namespace DogGo.Repositories
                             Name = reader.GetString(reader.GetOrdinal("Name")),
                             OwnerId = reader.GetInt32(reader.GetOrdinal("OwnerId")),
                             Breed = reader.GetString(reader.GetOrdinal("Breed")),
-                            //Notes = reader.GetString(reader.GetOrdinal("Notes")),
-                            //ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl"))
+                            Notes = ReaderUtils.GetNullableString(reader, "Notes"),
+                            ImageUrl = ReaderUtils.GetNullableString(reader, "ImageUrl")
                         };
                         dogs.Add(dog);
                     }
@@ -79,9 +79,7 @@ namespace DogGo.Repositories
                             Breed = reader.GetString(reader.GetOrdinal("Breed")),
                             Notes = ReaderUtils.GetNullableString(reader, "Notes"),
                             ImageUrl = ReaderUtils.GetNullableString(reader,"ImageUrl")
-                        };
-                                              
-
+                        };                                          
                         reader.Close();
                         return dog;
                     }
@@ -119,5 +117,18 @@ namespace DogGo.Repositories
             }
         }
 
+        public void DeleteDog(int id)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "DELETE FROM Dog WHERE Id = @id";
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }
