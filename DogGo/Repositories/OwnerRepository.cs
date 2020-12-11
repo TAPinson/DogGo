@@ -30,7 +30,7 @@ namespace DogGo.Repositories
         }
 
         ///////////// End Starter /////////////
-        
+
         public List<Owner> GetAllOwners()
         {
             using (SqlConnection conn = Connection)
@@ -41,7 +41,7 @@ namespace DogGo.Repositories
                     cmd.CommandText = "SELECT Id, Email, Name, Address, NeighborhoodId, Phone FROM Owner";
 
                     SqlDataReader reader = cmd.ExecuteReader();
-                    
+
                     List<Owner> owners = new List<Owner>();
 
                     while (reader.Read())
@@ -149,8 +149,7 @@ namespace DogGo.Repositories
                     cmd.CommandText = @"
                     INSERT INTO Owner ([Name], Email, Phone, Address, NeighborhoodId)
                     OUTPUT INSERTED.ID
-                    VALUES (@name, @email, @phoneNumber, @address, @neighborhoodId);
-                ";
+                    VALUES (@name, @email, @phoneNumber, @address, @neighborhoodId);                ";
 
                     cmd.Parameters.AddWithValue("@name", owner.Name);
                     cmd.Parameters.AddWithValue("@email", owner.Email);
