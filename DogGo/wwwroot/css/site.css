@@ -98,3 +98,32 @@ body {
     text-align: center;
 }
 /* End All Walker View */
+
+/* Begin All Dogs View */
+.dog-card {
+    border: 1px solid;
+    padding: 1em;
+    margin: 1em;
+    width: 200px;
+    
+}
+
+.dog-name {
+    text-align: center;
+}
+
+.dog-image {
+    width: 150px;
+    margin-left: 1em;
+}
+
+.all-dogs-box {
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.dog-actions {
+    text-align: center;
+}
+/* End All Dogs View */
