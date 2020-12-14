@@ -5,11 +5,11 @@ using System.Threading.Tasks;
 using DogGo.Models;
 using Microsoft.Extensions.Configuration;
 using System.Data.SqlClient;
-
+using Doggo.Repositories;
 
 namespace DogGo.Repositories
 {
-    public class OwnerRepository
+    public class OwnerRepository : IOwnerRepository
     {
 
         //////////// Begin Starter ////////////
