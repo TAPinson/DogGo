@@ -9,7 +9,7 @@
     <img class="walker-details-img" src="@Model.ImageUrl" />
     <div class="walker-details-data">
         <div class="walker-name">Name: @Model.Name</div>
-        <div class="walker-neighborhood">Neighborhood: @Model.NeighborhoodId</div>
+        <div class="walker-neighborhood">Neighborhood: @Model.Neighborhood.Name</div>
         <div class="walker-edit-button">@Html.ActionLink("✏️", "Edit", new { id = Model.Id }) </div>
     </div>    
 </div>
