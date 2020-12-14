@@ -51,5 +51,17 @@ namespace DogGo.Repositories
                 }
             }
         }
+
+        public Neighborhood GetNeighborhoodById(int id)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = "";
+                }
+            }
+        }
     }
 }

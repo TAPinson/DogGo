@@ -127,3 +127,34 @@ body {
     text-align: center;
 }
 /* End All Dogs View */
+
+/* Begin Walker Details*/
+
+.walker-details-img {
+    width: 150px;
+}
+
+.walker-container {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+.walker-details-data {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;    
+}
+
+.walker-name {
+
+}
+
+.walker-neighborhood {
+
+}
+
+.walker-edit-button {
+    text-align: right;
+}
+
+/* End Walker Details*/

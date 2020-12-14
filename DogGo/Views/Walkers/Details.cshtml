@@ -5,8 +5,19 @@
 }
 
 <h1>Walker Profile</h1>
+<div class="walker-container">
+    <img class="walker-details-img" src="@Model.ImageUrl" />
+    <div class="walker-details-data">
+        <div class="walker-name">Name: @Model.Name</div>
+        <div class="walker-neighborhood">Neighborhood: @Model.NeighborhoodId</div>
+        <div class="walker-edit-button">@Html.ActionLink("✏️", "Edit", new { id = Model.Id }) </div>
+    </div>    
+</div>
+<div class="walk-container">
+    <h2>Recent Walks</h2>
+</div>
 
-<div>
+@*<div>
     <h4>Walker</h4>
     <hr />
     <dl class="row">
@@ -39,4 +50,4 @@
 <div>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
     <a asp-action="Index">Back to List</a>
-</div>
+</div>*@
