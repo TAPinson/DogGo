@@ -6,7 +6,7 @@ using DogGo.Models;
 
 namespace DogGo.Repositories
 {
-    interface IWalkRepository
+    public interface IWalkRepository
     {
         List<Walk> GetAllWalks();
 
