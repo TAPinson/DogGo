@@ -41,7 +41,7 @@ namespace DogGo.Controllers
             Walker walker = _walkerRepo.GetWalkerById(id);
             Neighborhood neighborhood = _neighborhoodRepo.GetNeighborhoodById(walker.NeighborhoodId);
             walker.Neighborhood = neighborhood;
-            List<Walk> walks = _walkRepo.GetByWalker(id);
+            List<Walk> walks = _walkRepo.GetWalkerViewWalks(id);
 
             if (walker == null)
             {

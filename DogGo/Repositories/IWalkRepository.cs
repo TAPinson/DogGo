@@ -11,5 +11,7 @@ namespace DogGo.Repositories
         List<Walk> GetAllWalks();
 
         List<Walk> GetByWalker(int id);
+
+        List<Walk> GetWalkerViewWalks(int id);
     }
 }
