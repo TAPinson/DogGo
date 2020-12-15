@@ -17,6 +17,15 @@
     <h2>Recent Walks</h2>
 </div>
 
+@foreach (var walk in Model.Walks)
+{
+<div class="walker-walk-details">
+    <div>Date: @walk.Date</div>
+    <div>Duration: @walk.Duration</div>
+    <div>DogId: @walk.DogId</div>
+</div>
+}
+
 @*<div>
     <h4>Walker</h4>
     <hr />

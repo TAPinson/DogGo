@@ -157,4 +157,11 @@ body {
     text-align: right;
 }
 
+.walker-walk-details {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    width: 50%;
+}
+
 /* End Walker Details*/
