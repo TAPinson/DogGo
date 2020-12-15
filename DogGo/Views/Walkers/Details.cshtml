@@ -1,4 +1,4 @@
-﻿@model DogGo.Models.Walker
+﻿@model DogGo.Models.ViewModels.ProfileViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -6,11 +6,11 @@
 
 <h1>Walker Profile</h1>
 <div class="walker-container">
-    <img class="walker-details-img" src="@Model.ImageUrl" />
+    <img class="walker-details-img" src="@Model.Walker.ImageUrl" />
     <div class="walker-details-data">
-        <div class="walker-name">Name: @Model.Name</div>
-        <div class="walker-neighborhood">Neighborhood: @Model.Neighborhood.Name</div>
-        <div class="walker-edit-button">@Html.ActionLink("✏️", "Edit", new { id = Model.Id }) </div>
+        <div class="walker-name">Name: @Model.Walker.Name</div>
+        <div class="walker-neighborhood">Neighborhood: @Model.Walker.Neighborhood.Name</div>
+        <div class="walker-edit-button">@Html.ActionLink("✏️", "Edit", new { id = Model.Walker.Id }) </div>
     </div>    
 </div>
 <div class="walk-container">
