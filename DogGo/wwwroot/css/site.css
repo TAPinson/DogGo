@@ -138,20 +138,13 @@ body {
     display: flex;
     flex-wrap: nowrap;
     margin-bottom: 5em;    
+    
 }
 
 .walker-details-data {
     display: flex;
     flex-direction: column;
     justify-content: center;    
-}
-
-.walker-name {
-
-}
-
-.walker-neighborhood {
-
 }
 
 .walker-edit-button {
@@ -161,6 +154,7 @@ body {
 .walk-container {
     display: flex;
     flex-wrap: nowrap;
+    margin-top: 2em;
 
 }
 
@@ -173,12 +167,20 @@ body {
 
 .walker-walk-table {
     width: 40%;
-    text-align: center;
+    
 }
 
 .walker-walk-walktime {
     margin-left: 10em;
     font-size: x-large;
 }
+.walker-walk-table-th {
+    color: grey;
+}
 
+.walker-walk-table-tr {
+    height: 5em;
+    border-bottom: 1px solid;
+    font-weight: 700;
+}
 /* End Walker Details*/
