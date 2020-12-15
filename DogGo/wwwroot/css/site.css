@@ -137,6 +137,7 @@ body {
 .walker-container {
     display: flex;
     flex-wrap: nowrap;
+    margin-bottom: 5em;    
 }
 
 .walker-details-data {
@@ -157,11 +158,27 @@ body {
     text-align: right;
 }
 
+.walk-container {
+    display: flex;
+    flex-wrap: nowrap;
+
+}
+
 .walker-walk-details {
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
     width: 50%;
+}
+
+.walker-walk-table {
+    width: 40%;
+    text-align: center;
+}
+
+.walker-walk-walktime {
+    margin-left: 10em;
+    font-size: x-large;
 }
 
 /* End Walker Details*/
