@@ -2,12 +2,15 @@
 using DogGo.Models;
 using DogGo.Models.ViewModels;
 using DogGo.Repositories;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 
@@ -35,14 +38,14 @@ namespace DogGo.Controllers
 
         ////////// End Starter //////////
 
-        // GET: OwnersController1
+        // GET: OwnersController
         public ActionResult Index()
         {
             List<Owner> owners = _ownerRepo.GetAllOwners();
             return View(owners);
         }
 
-        // GET: OwnersController1/Details/5
+        // GET: OwnersController/Details/5
         public ActionResult Details(int id)
         {
             Owner owner = _ownerRepo.GetOwnerById(id);
@@ -61,7 +64,7 @@ namespace DogGo.Controllers
             return View(vm);
         }
 
-        // GET: OwnersController1/Create
+        // GET: OwnersController/Create
         public ActionResult Create()
         {
             List<Neighborhood> neighborhoods = _neighborhoodRepo.GetAll();
@@ -75,7 +78,7 @@ namespace DogGo.Controllers
             return View(vm);
         }
 
-        // POST: OwnersController1/Create
+        // POST: OwnersController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create(Owner owner)
@@ -91,7 +94,7 @@ namespace DogGo.Controllers
             }
         }
 
-        // GET: OwnersController1/Edit/5
+        // GET: OwnersController/Edit/5
         public ActionResult Edit(int id)
         {
             Owner owner = _ownerRepo.GetOwnerById(id);
@@ -111,7 +114,7 @@ namespace DogGo.Controllers
             return View(vm);
         }
 
-        // POST: OwnersController1/Edit/5
+        // POST: OwnersController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, Owner owner)
@@ -127,14 +130,14 @@ namespace DogGo.Controllers
             }
         }
 
-        // GET: OwnersController1/Delete/5
+        // GET: OwnersController/Delete/5
         public ActionResult Delete(int id)
         {
             Owner owner = _ownerRepo.GetOwnerById(id);
             return View(owner);
         }
 
-        // POST: OwnersController1/Delete/5
+        // POST: OwnersController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, Owner owner)
@@ -148,6 +151,38 @@ namespace DogGo.Controllers
             {
                 return View(owner);
             }
+        }
+
+        public ActionResult Login()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<ActionResult> Login(LoginViewModel viewModel)
+        {
+            Owner owner = _ownerRepo.GetOwnerByEmail(viewModel.Email);
+
+            if (owner == null)
+            {
+                return Unauthorized();
+            }
+
+            List<Claim> claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.NameIdentifier, owner.Id.ToString()),
+                new Claim(ClaimTypes.Email, owner.Email),
+                new Claim(ClaimTypes.Role, "DogOwner"),
+            };
+
+            ClaimsIdentity claimsIdentity = new ClaimsIdentity(
+                claims, CookieAuthenticationDefaults.AuthenticationScheme);
+
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                new ClaimsPrincipal(claimsIdentity));
+
+            return RedirectToAction("Index", "Dogs");
         }
     }
 }
