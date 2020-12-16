@@ -35,10 +35,18 @@ namespace DogGo.Controllers
         // GET: WalkersController
         public ActionResult Index()
         {
-            int loggedInUser = GetCurrentUserId();
-            Owner thisUser = _ownerRepo.GetOwnerById(loggedInUser);
-            List<Walker> walkers = _walkerRepo.GetWalkersInNeighborhood(thisUser.NeighborhoodId);
-            return View(walkers);
+            try
+            {
+                int loggedInUser = GetCurrentUserId();
+                Owner thisUser = _ownerRepo.GetOwnerById(loggedInUser);
+                List<Walker> walkers = _walkerRepo.GetWalkersInNeighborhood(thisUser.NeighborhoodId);
+                return View(walkers);
+            }
+            catch
+            {
+                List<Walker> walkers = _walkerRepo.GetAllWalkers();
+                return View(walkers);
+            }            
         }
 
         // GET: WalkersController/Details/5
