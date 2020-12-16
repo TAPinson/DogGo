@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace DogGo.Controllers
@@ -20,18 +21,23 @@ namespace DogGo.Controllers
 
         private IWalkRepository _walkRepo;
 
+        private IOwnerRepository _ownerRepo;
+
         // The constructor accepts an IConfiguration object as a parameter. This class comes from the ASP.NET framework and is useful for retrieving things out of the appsettings.json file like connection strings.
-        public WalkersController(IWalkerRepository walkerRepo, INeighborhoodRepository neighborhoodRepo, IWalkRepository walkRepo)
+        public WalkersController(IWalkerRepository walkerRepo, INeighborhoodRepository neighborhoodRepo, IWalkRepository walkRepo, IOwnerRepository ownerRepo)
         {
             _walkerRepo = walkerRepo;
             _neighborhoodRepo = neighborhoodRepo;
             _walkRepo = walkRepo;
+            _ownerRepo = ownerRepo;
         }
 
         // GET: WalkersController
         public ActionResult Index()
         {
-            List<Walker> walkers = _walkerRepo.GetAllWalkers();
+            int loggedInUser = GetCurrentUserId();
+            Owner thisUser = _ownerRepo.GetOwnerById(loggedInUser);
+            List<Walker> walkers = _walkerRepo.GetWalkersInNeighborhood(thisUser.NeighborhoodId);
             return View(walkers);
         }
 
@@ -118,6 +124,12 @@ namespace DogGo.Controllers
             {
                 return View();
             }
+        }
+
+        private int GetCurrentUserId()
+        {
+            string id = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            return int.Parse(id);
         }
     }
 }
