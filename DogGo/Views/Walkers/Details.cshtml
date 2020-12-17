@@ -16,7 +16,6 @@
 <h2>Recent Walks</h2>
 <div class="walk-container">
 
-
     <table class="walker-walk-table">
         <thead class="walker-walk-table-thread">
             <tr>
@@ -34,7 +33,6 @@
         <tbody>
             @foreach (var item in Model.Walks)
             {
-
                 <tr class="walker-walk-table-tr">
                     <td>
                         @Html.DisplayFor(modelItem => item.Date)
@@ -45,8 +43,7 @@
                     <td>
                         @Html.DisplayFor(modelItem => item.DurationMinutes) Minutes
                     </td>
-                </tr>
-                
+                </tr>                
             }
         </tbody>
     </table>
