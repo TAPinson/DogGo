@@ -4,6 +4,7 @@ using DogGo.Models;
 using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using DogGo.Repositories.utils;
 
 namespace DogGo.Repositories
 {
@@ -16,9 +17,6 @@ namespace DogGo.Repositories
         {
             _config = config;
         }
-
-
-
 
         public SqlConnection Connection
         {
@@ -136,6 +134,29 @@ namespace DogGo.Repositories
                     reader.Close();
 
                     return walkers;
+                }
+            }
+        }
+
+        public void AddWalker(Walker walker)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                    INSERT INTO Walker (Name, ImageUrl, NeighborhoodId)
+                    OUTPUT INSERTED.ID
+                    VALUES (@name, @imageUrl, @neighborhoodId);";
+
+                    cmd.Parameters.AddWithValue("@name", walker.Name);
+                    cmd.Parameters.AddWithValue("imageUrl", walker.ImageUrl);
+                    cmd.Parameters.AddWithValue("neighborhoodId", ReaderUtils.GetNullableParam(walker.NeighborhoodId));
+
+                    int id = (int)cmd.ExecuteScalar();
+
+                    walker.Id = id;
                 }
             }
         }
