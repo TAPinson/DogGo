@@ -1,4 +1,5 @@
-﻿using DogGo.Models;
+﻿using Doggo.Repositories;
+using DogGo.Models;
 using DogGo.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -16,12 +17,15 @@ namespace DogGo.Controllers
     public class DogsController : Controller
     {
         ////////// Starter //////////
-        private readonly DogRepository _dogRepo;
+        //private readonly DogRepository _dogRepo;
+        private IDogRepository _dogRepo;
+        private IOwnerRepository _ownerRepo;
 
         // The constructor accepts an IConfiguration object as a parameter. This class comes from the ASP.NET framework and is useful for retrieving things out of the appsettings.json file like connection strings.
-        public DogsController(IConfiguration config)
+        public DogsController(IDogRepository dogRepo, IOwnerRepository ownerRepo)
         {
-            _dogRepo = new DogRepository(config);
+            _dogRepo = dogRepo;
+            _ownerRepo = ownerRepo;
         }
 
         ////////// End Starter //////////
@@ -32,7 +36,14 @@ namespace DogGo.Controllers
         public ActionResult Index()
         {
             int ownerId = GetCurrentUserId();
+            Owner owner = _ownerRepo.GetOwnerById(ownerId);
             List<Dog> dogs = _dogRepo.GetDogsByOwnerId(ownerId);
+
+            foreach (Dog dog in dogs)
+            {
+                dog.Owner = owner;
+            }
+
             return View(dogs);
         }
 
@@ -100,6 +111,8 @@ namespace DogGo.Controllers
         {
             try
             {
+                dog.OwnerId = GetCurrentUserId();
+
                 _dogRepo.UpdateDog(dog);
                 return RedirectToAction(nameof(Index));
             }
