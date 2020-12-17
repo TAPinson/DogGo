@@ -123,8 +123,8 @@ namespace DogGo.Repositories
                         Walker walker = new Walker
                         {
                             Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            Name = reader.GetString(reader.GetOrdinal("Name")),
-                            ImageUrl = reader.GetString(reader.GetOrdinal("ImageUrl")),
+                            Name = reader.GetString(reader.GetOrdinal("Name")),                            
+                            ImageUrl = ReaderUtils.GetNullableString(reader, "ImageUrl"),
                             NeighborhoodId = reader.GetInt32(reader.GetOrdinal("NeighborhoodId"))
                         };
 
@@ -151,7 +151,7 @@ namespace DogGo.Repositories
                     VALUES (@name, @imageUrl, @neighborhoodId);";
 
                     cmd.Parameters.AddWithValue("@name", walker.Name);
-                    cmd.Parameters.AddWithValue("imageUrl", walker.ImageUrl);
+                    cmd.Parameters.AddWithValue("imageUrl", ReaderUtils.GetNullableParam(walker.ImageUrl));
                     cmd.Parameters.AddWithValue("neighborhoodId", ReaderUtils.GetNullableParam(walker.NeighborhoodId));
 
                     int id = (int)cmd.ExecuteScalar();

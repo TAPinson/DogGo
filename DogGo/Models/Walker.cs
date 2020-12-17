@@ -17,7 +17,7 @@ namespace DogGo.Models
         [Required(ErrorMessage = "What area do you walk in?")]
         public int NeighborhoodId { get; set; }
 
-        [Required(ErrorMessage = "Need an image please")]
+        //[Required(ErrorMessage = "Need an image please")]
         public string ImageUrl { get; set; }
 
         public Neighborhood Neighborhood { get; set; }      
