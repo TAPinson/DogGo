@@ -94,21 +94,33 @@ namespace DogGo.Controllers
         // GET: WalkersController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            Walker walker = _walkerRepo.GetWalkerById(id);
+
+            List<Neighborhood> neighborhoods = _neighborhoodRepo.GetAll();
+
+            WalkerEditViewModel vm = new WalkerEditViewModel()
+            {
+                Walker = walker,
+                Neighborhoods = neighborhoods
+            };
+
+            return View(vm);
         }
 
         // POST: WalkersController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Walker walker)
         {
             try
             {
+                // Create Edit Walker method to finish this
+                _walkerRepo.UpdateWalker(walker);
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return View(walker) ;
             }
         }
 
