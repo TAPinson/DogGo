@@ -67,9 +67,9 @@
             <ul class="list-group mt-4">
                 @foreach (Walker walker in Model.Walkers)
                 {
-                <li class="list-group-item disabled" aria-disabled="true">
-                    <img src="@walker.ImageUrl" style="width:50px" alt="avatar" />            
-                    <span class="font-weight-bold ml-4">@walker.Name</span>
+                <li class="list-group-item" aria-disabled="true">
+                    <img src="@walker.ImageUrl" style="width:50px" alt="avatar" />           
+                    <a class="text-dark font-weight-bold" asp-controller="Walkers" asp-action="Details" asp-route-id="@walker.Id">@walker.Name</a>
                 </li>
                 }
             </ul>
