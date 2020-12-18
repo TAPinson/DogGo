@@ -1,5 +1,6 @@
 ﻿using Doggo.Repositories;
 using DogGo.Models;
+using DogGo.Models.ViewModels;
 using DogGo.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -52,12 +53,20 @@ namespace DogGo.Controllers
         {
             Dog dog = _dogRepo.GetDogById(id);
 
+            Owner owner = _ownerRepo.GetOwnerById(dog.OwnerId);
+
+            dog.Owner = owner;
+
             if (dog == null)
             {
                 return NotFound();
             }
 
-            return View(dog);
+            DogProfileViewModel vm = new DogProfileViewModel()
+            {
+                dog = dog
+            };
+            return View(vm);
         }
 
         // GET: DogsController/Create

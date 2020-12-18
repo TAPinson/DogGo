@@ -14,10 +14,6 @@
         <div class="walker-card">
             <h2>@item.Name</h2>
             <img class="owner-avatar" src="@item.ImageUrl" alt="avatar" />
-            <div class="owner-details">
-                ID = @item.Id <br />
-                NeighborhoodId = @item.NeighborhoodId <br />
-            </div>
             <div class="owner-actions">
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                 @Html.ActionLink("Details", "Details", new { id = item.Id }) |
