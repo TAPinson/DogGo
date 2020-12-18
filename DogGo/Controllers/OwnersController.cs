@@ -187,6 +187,12 @@ namespace DogGo.Controllers
             return RedirectToAction("Index", "Owners");
         }
 
+        public async Task<ActionResult> Logout()
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Login");
+        }
+
         private int GetCurrentUserId()
         {
             string id = User.FindFirstValue(ClaimTypes.NameIdentifier);
