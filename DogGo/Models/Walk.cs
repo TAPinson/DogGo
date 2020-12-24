@@ -17,5 +17,7 @@ namespace DogGo.Models
                 return Duration / 60;
             }
         }
+
+        public int WalkStatusId { get; set; }
     }
 }

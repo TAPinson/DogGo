@@ -41,15 +41,16 @@ namespace DogGo.Controllers
         // POST: WalksController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(Walk walk)
         {
             try
             {
+                _walkRepo.AddWalk(walk);
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
-                return View();
+                return View(walk);
             }
         }
 

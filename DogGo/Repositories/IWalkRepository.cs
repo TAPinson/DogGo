@@ -13,5 +13,7 @@ namespace DogGo.Repositories
         List<Walk> GetByWalker(int id);
 
         List<Walk> GetWalkerViewWalks(int id);
+
+        public void AddWalk(Walk walk);
     }
 }

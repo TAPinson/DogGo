@@ -149,7 +149,7 @@ namespace DogGo.Repositories
                     cmd.CommandText = @"
                     INSERT INTO Owner ([Name], Email, Phone, Address, NeighborhoodId)
                     OUTPUT INSERTED.ID
-                    VALUES (@name, @email, @phoneNumber, @address, @neighborhoodId);                ";
+                    VALUES (@name, @email, @phoneNumber, @address, @neighborhoodId);";
 
                     cmd.Parameters.AddWithValue("@name", owner.Name);
                     cmd.Parameters.AddWithValue("@email", owner.Email);
