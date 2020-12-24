@@ -100,7 +100,7 @@ namespace DogGo.Repositories
                     cmd.CommandText = @"
                     SELECT Walks.Id, Date, Duration, Owner.Name
                     FROM Walks
-                    JOIN Dog ON Dog.Id = Walks.Id
+                    JOIN Dog ON Dog.Id = Walks.DogId
                     JOIN Owner ON Dog.OwnerId = Owner.Id
                     WHERE WalkerId = @walkerId";                    
                     cmd.Parameters.AddWithValue("@walkerId", walkerId);
