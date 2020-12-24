@@ -102,10 +102,9 @@ namespace DogGo.Repositories
                     FROM Walks
                     JOIN Dog ON Dog.Id = Walks.Id
                     JOIN Owner ON Dog.OwnerId = Owner.Id
-                    WHERE WalkerId = @id";                    
-                    cmd.Parameters.AddWithValue("@id", walkerId);
-                    SqlDataReader reader = cmd.ExecuteReader();
-                    /////// PAUSE /////////
+                    WHERE WalkerId = @walkerId";                    
+                    cmd.Parameters.AddWithValue("@walkerId", walkerId);
+                    SqlDataReader reader = cmd.ExecuteReader();          
                     List<Walk> walks = new List<Walk>();
                     while (reader.Read())
                     {                      

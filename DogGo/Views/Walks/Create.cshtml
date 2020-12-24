@@ -1,4 +1,4 @@
-﻿@model DogGo.Models.Walk
+﻿@model DogGo.Models.ViewModels.WalkFormViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -12,36 +12,59 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            @*<div class="form-group">
-                <label asp-for="Id" class="control-label"></label>
-                <input asp-for="Id" class="form-control" />
-                <span asp-validation-for="Id" class="text-danger"></span>
-            </div>*@
+
             <div class="form-group">
-                <label asp-for="Date" class="control-label"></label>
-                <input asp-for="Date" class="form-control" />
-                <span asp-validation-for="Date" class="text-danger"></span>
+                <label asp-for="Walk.Date" class="control-label"></label>
+                <input asp-for="Walk.Date" class="form-control" />
+                <span asp-validation-for="Walk.Date" class="text-danger"></span>
             </div>
+
             <div class="form-group">
-                <label asp-for="Duration" class="control-label"></label>
-                <input asp-for="Duration" class="form-control" />
-                <span asp-validation-for="Duration" class="text-danger"></span>
+                <label asp-for="Walk.Duration" class="control-label"></label>
+                <input asp-for="Walk.Duration" class="form-control" />
+                <span asp-validation-for="Walk.Duration" class="text-danger"></span>
             </div>
+
+
             <div class="form-group">
-                <label asp-for="WalkerId" class="control-label"></label>
-                <input asp-for="WalkerId" class="form-control" />
-                <span asp-validation-for="WalkerId" class="text-danger"></span>
+                <label asp-for="Walk.WalkerId" class="control-label"></label>
+                <select asp-for="Walk.WalkerId" class="form-control">
+                    <option value="">Select Walker</option>
+                    @foreach (Walker walker in Model.Walkers)
+                    {
+                        <option value="@walker.Id">@walker.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="Walk.WalkerId" class="text-danger"></span>
             </div>
+
+
             <div class="form-group">
-                <label asp-for="DogId" class="control-label"></label>
-                <input asp-for="DogId" class="form-control" />
-                <span asp-validation-for="DogId" class="text-danger"></span>
+                <label asp-for="Walk.DogId" class="control-label"></label>
+                <select asp-for="Walk.DogId" class="form-control">
+                    <option value="">Select Dog</option>
+                    @foreach (Dog dog in Model.Dogs)
+                    {
+                        <option value="@dog.Id">@dog.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="Walk.DogId" class="text-danger"></span>
             </div>
+
+
+
             <div class="form-group">
-                <label asp-for="WalkStatusId" class="control-label"></label>
-                <input asp-for="WalkStatusId" class="form-control" />
-                <span asp-validation-for="WalkStatusId" class="text-danger"></span>
+                <label asp-for="Walk.WalkStatusId" class="control-label"></label>
+                <select asp-for="Walk.WalkStatusId" class="form-control">
+                    <option value="">Select Dog</option>
+                    @foreach (WalkStatus walkStatus in Model.WalkStatuses)
+                    {
+                        <option value="@walkStatus.Id">@walkStatus.Description</option>
+                    }
+                </select>
+                <span asp-validation-for="Walk.WalkStatusId" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

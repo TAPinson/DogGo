@@ -5,7 +5,8 @@
 }
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Create New Walker</a> <br />
+    <a asp-controller="Walks" asp-action="Create">Schedule a Walk</a>
 </p>
 
 <div class="all-walker-cards">
@@ -13,6 +14,7 @@
     {
         <div class="walker-card">
             <h2>@item.Name</h2>
+            <div>@item.Id</div>
             <img class="owner-avatar" src="@item.ImageUrl" alt="avatar" />
             <div class="owner-actions">
                 @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
